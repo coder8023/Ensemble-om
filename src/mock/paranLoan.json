@@ -1,4 +1,67 @@
 {
+  "partnerType":[
+    {
+      "value": "1",
+      "label": "1 - 类金融机构"
+    },
+    {
+      "value": "2",
+      "label": "2 - 非金融机构"
+    }],
+  "drwdownType":[
+    {
+      "value": "1",
+      "label": "1 - 批量"
+    },
+    {
+      "value": "2",
+      "label": "2 - 联机"
+    }],
+  "contributiveType":[
+    {
+      "value": "C",
+      "label": "C - 共同出资"
+    },
+    {
+      "value": "P",
+      "label": "P - 合作方全额出资"
+    }],
+  "joinType":[
+    {
+      "value": "M",
+      "label": "M - 管理方核算"
+    },
+    {
+      "value": "P",
+      "label": "P - 合作方核算"
+    }],
+  "rateLimitFlag":[
+    {
+      "value": "Y",
+      "label": "Y -  利率分层"
+    },
+    {
+      "value": "N",
+      "label": "N - 利率不分层"
+    }],
+  "limitCheckFlag":[
+    {
+      "value": "Y",
+      "label": "Y - 检查额度"
+    },
+    {
+      "value": "N",
+      "label": "N - 不检查额度"
+    }],
+  "limitCycle":[
+    {
+      "value": "Y",
+      "label": "Y - 循环额度"
+    },
+    {
+      "value": "N",
+      "label": "N - 非循环额度"
+    }],
   "ccy":[
     {
       "value": "CHN",

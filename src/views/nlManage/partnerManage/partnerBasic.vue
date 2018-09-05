@@ -9,7 +9,6 @@
                 <v-subheader class="primary--text subheading">合作方编码*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <!-- <span class="primary--text mx-3 pt-4 subheading">产品类型*</span> -->
                 <v-text-field class="primary--text mx-1" label="合作方编码" name="title" v-model="eventForm.partnerCode" single-line hide-details>
                 </v-text-field>
               </v-flex>
@@ -23,38 +22,37 @@
                 <v-subheader class="primary--text subheading">客户号*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <!-- <span class="primary--text mx-3 pt-4 subheading datatest.prodType.prodDesc">产品描述</span> -->
                 <v-text-field class="primary--text mx-2" label="客户号" name="title" v-model="eventForm.clientNo" single-line hide-details/>
               </v-flex>
                 <v-flex xs12 md2 lg2>
                   <v-subheader class="primary--text subheading">合作方类型*</v-subheader>
                 </v-flex>
                 <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="partnerType" v-model="eventForm.partnerType" label="合作方类型" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="partnerType" v-model="eventForm.partnerType" label="合作方类型" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">放款模式*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="drwdownType" v-model="eventForm.drwdownType" label="放款模式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="drwdownType" v-model="eventForm.drwdownType" label="放款模式" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">出资方式*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="contributiveType" v-model="eventForm.contributiveType" label="出资方式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="contributiveType" v-model="eventForm.contributiveType" label="出资方式" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">核算方式*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="joinType" v-model="eventForm.joinType" label="核算方式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="joinType" v-model="eventForm.joinType" label="核算方式" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">利率是否分层*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="rateLimitFlag" v-model="eventForm.rateLimitFlag" label="利率是否分层" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="rateLimitFlag" v-model="eventForm.rateLimitFlag" label="利率是否分层" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">合作方利率分层比例（%）*</v-subheader>
@@ -66,13 +64,13 @@
                 <v-subheader class="primary--text subheading">是否校验额度*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="limitCheckFlag" v-model="eventForm.limitCheckFlag" label="是否校验额度" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="limitCheckFlag" v-model="eventForm.limitCheckFlag" label="是否校验额度" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">额度是否循环*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="limitCycle" v-model="eventForm.limitCycle" label="额度是否循环" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
+                <v-select class="primary--text mx-2" :items="limitCycle" v-model="eventForm.limitCycle" label="额度是否循环" item-text="label" item-value="value" single-line hide-details></v-select>
               </v-flex>
 
               <v-flex xs12 md2 lg2>
@@ -86,14 +84,12 @@
                 <v-subheader class="primary--text subheading">合作方额度*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <!-- <span class="primary--text mx-3 pt-4 subheading">产品类型*</span> -->
                 <v-text-field class="primary--text mx-1" label="合作方额度" name="title" v-model="eventForm.partnerLimit" single-line hide-details>
                 </v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
         </div>
-        <!-- </v-widget> -->
       </v-flex>
     </v-layout>
   </v-container>
@@ -156,12 +152,6 @@
                 }
             ],
             rateLimitFlag: [
-                {
-                    label: "",
-                    value: ""
-                }
-            ],
-            rateRatio: [
                 {
                     label: "",
                     value: ""
