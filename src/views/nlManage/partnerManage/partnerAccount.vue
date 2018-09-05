@@ -9,20 +9,20 @@
                 <v-subheader class="primary--text subheading">对账日期*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-1" label="对账日期" name="title" v-model="eventForm.partnerCode" single-line hide-details>
+                <v-text-field class="primary--text mx-1" label="对账日期" name="title" v-model="eventForm.accountCheckingDate" single-line hide-details>
                 </v-text-field>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">对账日*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="对账日" name="title" v-model="eventForm.partnerName" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="对账日" name="title" v-model="eventForm.accountCheckingDay" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">对账频率*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="对账频率" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="对账频率" name="title" v-model="eventForm.accountCheckingFreq" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <!--<v-subheader class="primary&#45;&#45;text subheading">对账频率*</v-subheader>-->
@@ -34,49 +34,49 @@
                 <v-subheader class="primary--text subheading">发放是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="发放是否对账" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="发放是否对账" name="title" v-model="eventForm.drawdownCheckInd" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">发放对账代码*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="发放对账代码" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="发放对账代码" name="title" v-model="eventForm.drawdownCheckCode" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">回收是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="回收是否对账" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="回收是否对账" name="title" v-model="eventForm.receiptCheckInd" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">回收对账代码*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="回收对账代码" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="回收对账代码" name="title" v-model="eventForm.receiptCheckCode" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">还款计划是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="还款计划是否对账" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="还款计划是否对账" name="title" v-model="eventForm.schedCheckInd" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">还款计划对账代码*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="还款计划对账代码" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="还款计划对账代码" name="title" v-model="eventForm.schedCheckCode" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">结算账户是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="结算账户是否对账" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="结算账户是否对账" name="title" v-model="eventForm.settleCheckInd" single-line hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">结算账户对账代码*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="结算账户对账代码" name="title" v-model="eventForm.clientNo" single-line hide-details/>
+                <v-text-field class="primary--text mx-2" label="结算账户对账代码" name="title" v-model="eventForm.settleCheckCode" single-line hide-details/>
               </v-flex>
             </v-layout>
           </v-container>
@@ -104,19 +104,17 @@
             endTime: null,
             modal: false,
             eventForm: {
-                partnerCode: '',
-                partnerName: '',
-                clientNo: '',
-                partnerType: '',
-                drwdownType: '',
-                contributiveType: '',
-                joinType: '',
-                rateLimitFlag: '',
-                rateRatio: '',
-                limitCheckFlag: '',
-                limitCycle: '',
-                ccy: '',
-                partnerLimit: ''
+                accountCheckingDate: '',
+                accountCheckingDay: '',
+                accountCheckingFreq: '',
+                drawdownCheckInd: '',
+                drawdownCheckCode: '',
+                receiptCheckInd: '',
+                receiptCheckCode: '',
+                schedCheckInd: '',
+                schedCheckCode: '',
+                settleCheckInd: '',
+                settleCheckCode: ''
             },
             busimodel: [
                 {
