@@ -9,8 +9,10 @@
                 <v-subheader class="primary--text subheading">对账日期*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-1" label="对账日期" name="title" v-model="eventForm.accountCheckingDate" single-line hide-details>
-                </v-text-field>
+                <v-menu ref="checkingDateMenu" lazy :close-on-content-click="false" v-model="checkingDateMenu" transition="scale-transition" offset-y full-width :nudge-bottom="-22" min-width="290px" :return-value.sync="endDate">
+                  <v-text-field slot="activator" label="对账日期" v-model="eventForm.accountCheckingDate" append-icon="event" single-line hide-details/>
+                  <v-date-picker v-model="eventForm.accountCheckingDate" @input="$refs.checkingDateMenu.save(eventForm.failuredate)" no-title scrollable locale="zh-cn"/>
+                </v-menu>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">对账日*</v-subheader>
@@ -34,7 +36,7 @@
                 <v-subheader class="primary--text subheading">发放是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="发放是否对账" name="title" v-model="eventForm.drawdownCheckInd" single-line hide-details/>
+                <v-switch :label="`${drawdownCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.drawdownCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">发放对账代码*</v-subheader>
@@ -46,7 +48,7 @@
                 <v-subheader class="primary--text subheading">回收是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="回收是否对账" name="title" v-model="eventForm.receiptCheckInd" single-line hide-details/>
+                <v-switch :label="`${receiptCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.receiptCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">回收对账代码*</v-subheader>
@@ -58,7 +60,7 @@
                 <v-subheader class="primary--text subheading">还款计划是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="还款计划是否对账" name="title" v-model="eventForm.schedCheckInd" single-line hide-details/>
+                <v-switch :label="`${schedCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.schedCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">还款计划对账代码*</v-subheader>
@@ -71,6 +73,7 @@
               </v-flex>
               <v-flex md4 lg4>
                 <v-text-field class="primary--text mx-2" label="结算账户是否对账" name="title" v-model="eventForm.settleCheckInd" single-line hide-details/>
+                <v-switch :label="`${settleCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.settleCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">结算账户对账代码*</v-subheader>
@@ -91,18 +94,7 @@
     export default {
         props: ["prodData"],
         data: () => ({
-            title: null,
-            failuredateData: "",
-            valid: true,
-            date: null,
-            startDate: "",
-            startTimeMenu: false,
-            startTime: null,
-            endDateMenu: false,
-            endDate: "",
-            endTimeMenu: false,
-            endTime: null,
-            modal: false,
+            checkingDateMenu: false,
             eventForm: {
                 accountCheckingDate: '',
                 accountCheckingDay: '',

@@ -5,13 +5,6 @@
         <v-toolbar color="primary lighten-1" dark tabs>
           <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title class="white--text">合作方签约</v-toolbar-title>
-          <v-flex xs12 md2 lg2>
-            <v-subheader class="primary--text subheading">合作方编码*</v-subheader>
-          </v-flex>
-          <v-flex md4 lg4>
-          <v-text-field class="primary--text mx-1" label="合作方编码" name="title" single-line hide-details>
-          </v-text-field>
-          </v-flex>
           <v-tabs color="primary lighten-1" slot="extension" v-model="activeName" grow show-arrows>
             <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tab v-for="n in prodInfo" :key="n">
