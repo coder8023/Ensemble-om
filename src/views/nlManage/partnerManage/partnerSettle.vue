@@ -1,222 +1,202 @@
 <template>
-  <v-container fluid pr-5 pt-0>
-    <v-layout row wrap>
-      <v-flex xs12 md12 lg12>
-        <div slot="widget-content">
-          <v-container fluid pt-1>
-            <v-layout row wrap>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">合作方编码*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-1" label="合作方编码" name="title" v-model="eventForm.partnerCode" single-line hide-details>
-                </v-text-field>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">合作方名称*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="合作方名称" name="title" v-model="eventForm.partnerName" single-line hide-details/>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">客户号*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="客户号" name="title" v-model="eventForm.clientNo" single-line hide-details/>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">合作方类型*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="busimodel" v-model="eventForm.partnerType" label="合作方类型" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">放款模式*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.drwdownType" label="放款模式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">出资方式*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.contributiveType" label="出资方式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">核算方式*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.joinType" label="核算方式" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">利率是否分层*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.rateLimitFlag" label="利率是否分层" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">合作方利率分层比例（%）*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="合作方利率分层比例（%）" name="title" v-model="eventForm.rateRatio" single-line hide-details/>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">是否校验额度*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.limitCheckFlag" label="是否校验额度" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">额度是否循环*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.limitCycle" label="额度是否循环" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
+  <div>
+    <v-toolbar flat color="white">
+      <v-toolbar-title>结算信息</v-toolbar-title>
+      <v-divider
+              class="mx-2"
+              inset
+              vertical
+      ></v-divider>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500px">
+        <v-btn slot="activator" color="primary" dark class="mb-2">新增</v-btn>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
 
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">币种*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-select class="primary--text mx-2" :items="prodprepice" v-model="eventForm.ccy" label="币种" item-text="prodDesc" item-value="prodCode" single-line hide-details></v-select>
-              </v-flex>
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.settleAcctClass" label="结算账户类型"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.settleBaseAcctNo" label="账号"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.prodType" label="产品类型"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.ccy" label="币种"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.acctSeqNo" label="账户序列号"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.tranType" label="交易类型"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.settleAcctName" label="账户中文名称"></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
 
-              <v-flex xs12 md2 lg2>
-                <v-subheader class="primary--text subheading">合作方额度*</v-subheader>
-              </v-flex>
-              <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-1" label="合作方额度" name="title" v-model="eventForm.partnerLimit" single-line hide-details>
-                </v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </div>
-      </v-flex>
-    </v-layout>
-  </v-container>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click.native="close">关闭</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="save">保存</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-toolbar>
+    <v-data-table
+            :headers="headers"
+            :items="desserts"
+            hide-actions
+            class="elevation-1"
+    >
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.settleAcctClass }}</td>
+        <td class="text-xs-right">{{ props.item.settleBaseAcctNo }}</td>
+        <td class="text-xs-right">{{ props.item.prodType }}</td>
+        <td class="text-xs-right">{{ props.item.ccy }}</td>
+        <td class="text-xs-right">{{ props.item.acctSeqNo }}</td>
+        <td class="text-xs-right">{{ props.item.tranType }}</td>
+        <td class="text-xs-right">{{ props.item.settleAcctName }}</td>
+        <td class="justify-center layout px-0">
+          <v-icon
+                  small
+                  class="mr-2"
+                  @click="editItem(props.item)"
+          >
+            edit
+          </v-icon>
+          <v-icon
+                  small
+                  @click="deleteItem(props.item)"
+          >
+            delete
+          </v-icon>
+        </td>
+      </template>
+      <template slot="no-data">
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
     export default {
-        props: ["prodData"],
         data: () => ({
-            title: null,
-            failuredateData: "",
-            valid: true,
-            date: null,
-            startDate: "",
-            startTimeMenu: false,
-            startTime: null,
-            endDateMenu: false,
-            endDate: "",
-            endTimeMenu: false,
-            endTime: null,
-            modal: false,
-            eventForm: {
-                partnerCode: '',
-                partnerName: '',
-                clientNo: '',
-                partnerType: '',
-                drwdownType: '',
-                contributiveType: '',
-                joinType: '',
-                rateLimitFlag: '',
-                rateRatio: '',
-                limitCheckFlag: '',
-                limitCycle: '',
+            dialog: false,
+            headers: [
+                {
+                    text: '结算账户类型',
+                    align: 'left',
+                    sortable: false,
+                    value: 'settleAcctClass'
+                },
+                { text: '账号', value: 'settleBaseAcctNo' },
+                { text: '产品类型', value: 'prodType' },
+                { text: '币种', value: 'ccy' },
+                { text: '账户序列号', value: 'acctSeqNo' },
+                { text: '交易类型', value: 'tranType' },
+                { text: '账户中文名称', value: 'settleAcctName' },
+                { text: '操作', value: 'name', sortable: false }
+            ],
+            desserts: [],
+            editedIndex: -1,
+            editedItem: {
+                settleAcctClass: '',
+                settleBaseAcctNo: '',
+                prodType: '',
                 ccy: '',
-                partnerLimit: ''
+                acctSeqNo: '',
+                tranType: '',
+                settleAcctName: ''
             },
-            busimodel: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            prodclass: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            acctstruct: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            virtualflag: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            acctintflag: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            amtflag: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            baseprod: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            prodstatus: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            prodmuti: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            prodprepice: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            acctsontype: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            accttype: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ],
-            profitcenter: [
-                {
-                    prodCode: "",
-                    prodDesc: ""
-                }
-            ]
+            defaultItem: {
+                settleAcctClass: 0,
+                settleBaseAcctNo: 0,
+                prodType: 0,
+                ccy: 0,
+                acctSeqNo: 0,
+                tranType: 0,
+                settleAcctName: 0
+            }
         }),
         computed: {
-            progress() {
-                return Math.min(100, this.value.length * 10);
+            formTitle () {
+                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
             }
         },
         watch: {
-            prodData(val) {
-                this.initProdData(val)
+            dialog (val) {
+                val || this.close()
             }
         },
-        mounted() {
-            this.initRefDate();
+        created () {
+            this.initialize()
         },
-    };
+        methods: {
+            initialize () {
+                this.desserts = [
+                    {
+                        settleAcctClass: '发放结算户',
+                        settleBaseAcctNo: 0,
+                        prodType: 0,
+                        ccy: 0,
+                        acctSeqNo: 0,
+                        tranType: 0,
+                        settleAcctName: 0
+                    },
+                    {
+                        settleAcctClass: '回收结算户',
+                        settleBaseAcctNo: 0,
+                        prodType: 0,
+                        ccy: 0,
+                        acctSeqNo: 0,
+                        tranType: 0,
+                        settleAcctName: 0
+                    },
+                    {
+                        settleAcctClass: '垫款内部户',
+                        settleBaseAcctNo: 0,
+                        prodType: 0,
+                        ccy: 0,
+                        acctSeqNo: 0,
+                        tranType: 0,
+                        settleAcctName: 0
+                    }
+                ]
+            },
+            editItem (item) {
+                this.editedIndex = this.desserts.indexOf(item)
+                this.editedItem = Object.assign({}, item)
+                this.dialog = true
+            },
+            deleteItem (item) {
+                const index = this.desserts.indexOf(item)
+                confirm('你确定要删除这一条数据吗?') && this.desserts.splice(index, 1)
+            },
+            close () {
+                this.dialog = false
+                setTimeout(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem)
+                    this.editedIndex = -1
+                }, 300)
+            },
+            save () {
+                if (this.editedIndex > -1) {
+                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                } else {
+                    this.desserts.push(this.editedItem)
+                }
+                this.close()
+            }
+        }
+    }
 </script>

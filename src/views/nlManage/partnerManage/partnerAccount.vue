@@ -36,7 +36,7 @@
                 <v-subheader class="primary--text subheading">发放是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-switch :label="`${drawdownCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.drawdownCheckInd" value="Y" color="success" hide-details/>
+                <v-switch :label="`${eventForm.drawdownCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.drawdownCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">发放对账代码*</v-subheader>
@@ -48,7 +48,7 @@
                 <v-subheader class="primary--text subheading">回收是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-switch :label="`${receiptCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.receiptCheckInd" value="Y" color="success" hide-details/>
+                <v-switch :label="`${eventForm.receiptCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.receiptCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">回收对账代码*</v-subheader>
@@ -60,7 +60,7 @@
                 <v-subheader class="primary--text subheading">还款计划是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-switch :label="`${schedCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.schedCheckInd" value="Y" color="success" hide-details/>
+                <v-switch :label="`${eventForm.schedCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.schedCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">还款计划对账代码*</v-subheader>
@@ -72,8 +72,8 @@
                 <v-subheader class="primary--text subheading">结算账户是否对账*</v-subheader>
               </v-flex>
               <v-flex md4 lg4>
-                <v-text-field class="primary--text mx-2" label="结算账户是否对账" name="title" v-model="eventForm.settleCheckInd" single-line hide-details/>
-                <v-switch :label="`${settleCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.settleCheckInd" value="Y" color="success" hide-details/>
+                <!--<v-text-field class="primary&#45;&#45;text mx-2" label="结算账户是否对账" name="title" v-model="eventForm.settleCheckInd" single-line hide-details/>-->
+                <v-switch :label="`${eventForm.settleCheckInd==='Y'?'对账':'不对账'}`" v-model="eventForm.settleCheckInd" value="Y" color="success" hide-details/>
               </v-flex>
               <v-flex xs12 md2 lg2>
                 <v-subheader class="primary--text subheading">结算账户对账代码*</v-subheader>
