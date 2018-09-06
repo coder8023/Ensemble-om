@@ -183,7 +183,7 @@
         },
         watch: {
             prodData(val) {
-                this.getInitData(val)
+                this.initProdData(val)
             }
         },
         mounted() {
@@ -192,6 +192,10 @@
         methods: {
             initProdData(val) {
                 this.eventForm = {}
+                //prodType
+                this.eventForm.partnerCode = val.partnerCode.partnerCode
+                this.eventForm.partnerName = val.partnerCode.partnerName
+                this.eventForm.clientNo = val.partnerCode.clientNo
             },
             initRefDate() {
                 getInitData().then(response => {

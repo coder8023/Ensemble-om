@@ -14,7 +14,7 @@
         </v-toolbar>
         <v-tabs-items v-model="activeName" class="white elevation-1">
           <v-tab-item v-for="i in 4" :key="i" :id="'mobile-tabs-5-' + i">
-            <partner-basic v-if="i==1"></partner-basic>
+            <partner-basic v-if="i==1" ref="callback" v-bind:prodData="prodData" v-on:getNewProdData="getNewProdData"></partner-basic>
             <partner-settle v-if="i==2"></partner-settle>
             <partner-contributive v-if="i==3"></partner-contributive>
             <partner-account v-if="i==4"></partner-account>
@@ -34,14 +34,14 @@
         </v-toolbar>
         <vue-perfect-scrollbar class="depositTree">
           <v-list two-line subheader>
-            <!--<v-subheader inset>个人活期产品</v-subheader>-->
+            <!--<v-subheader inset>合作方信息</v-subheader>-->
             <v-list-tile class="chat-list prodList" avatar v-for="(item, index ) in folders" :key="item.title" @click="handleClick(item)">
               <v-list-tile-avatar>
                 <v-icon :class="['amber white--text']">{{ 'call_to_action'}}</v-icon>
               </v-list-tile-avatar>
               <v-list-tile-content>
-                <v-list-tile-title>{{ item.prodType }}</v-list-tile-title>
-                <v-list-tile-sub-title>{{ item.prodDesc }}</v-list-tile-sub-title>
+                <v-list-tile-title>{{ item.partnerCode }}</v-list-tile-title>
+                <v-list-tile-sub-title>{{ item.partnerName }}</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-btn icon ripple>
@@ -61,6 +61,7 @@
     import PartnerSettle from '../partnerManage/partnerSettle';
     import PartnerContributive from '../partnerManage/partnerContributive';
     import PartnerAccount from '../partnerManage/partnerAccount';
+    import {getPartnerInfo} from '@/api/nLoan';
     export default {
         name: 'deposit',
         components: {
@@ -98,7 +99,12 @@
                     iconClass: 'blue white--text',
                     value: '',
                     lable: ''
-                }]
+                }],
+              folders: [
+              ],
+                  prodData: {},
+            sourceProdData: {},
+            targetData: {}
             }
         },
         created() {
@@ -106,19 +112,35 @@
         },
         mounted: function() {
             window.getApp.$emit('APP_DRAWER_TOGGLED');
-            this.prodClass = this.$route.hash
-            if(this.$route.params.prodClassCmp !=''){
-                this.prodClass = this.$route.params.prodClassCmp
-            }
-            if(this.$route.params.prodCodeCmp !=''){
-                this.initStage(this.$route.params.prodCodeCmp)
-            }
-        },
-        methods: {
-            queryProdInfo() {
-                console.log('start query prod info')
-            },
+            this.getTreeList()
 
+        },
+        // handleClick(value) {
+        //     this.partnerCode = value.partnerCode
+        //     getProdData(this.partnerCode).then(response => {
+        //         this.prodData = response.data
+        //         this.sourceProdData = this.copy(this.prodData,this.sourceProdData)
+        //     });
+        // },
+
+        methods: {
+            getTreeList() {
+                getPartnerInfo().then(response => {
+                    console.log(response)
+                    let length = response.data.length
+                    for(let j = 0; j<length; j++){
+                        this.folders.push(response.data[j])
+                    }
+                })
+            },
+            saveClick() {
+                this.$refs.callback[0].callbackprod()
+
+                // this.targetData = filterChangeData(this.prodData,this.sourceProdData)
+                // this.targetData.option="save";
+                // savaProdInfo(this.targetData);
+
+            },
             //对象浅复制
             copy(obj1,obj2) {
                 var obj = obj2||{};
@@ -146,22 +168,9 @@
             },
             getNewProdData(val) {
                 console.log(val)
-                this.prodData.prodType.prodType = val.eventForm.prodcode
-                this.prodData.prodType.prodDesc = val.eventForm.proddesc
-                this.prodData.prodType.prodRange = val.eventForm.prodprepice
-                this.prodData.prodType.prodClass = val.eventForm.prodclass
-                this.prodData.prodType.prodGroup = val.eventForm.prodmuti
-                this.prodData.prodType.status = val.eventForm.prodstatus
-                this.prodData.prodDefines.ACCT_STRUCT_FLAG.attrValue = val.eventForm.acctstruct
-                this.prodData.prodDefines.ACCT_REAL_FLAG.attrValue = val.eventForm.virtualflag
-                this.prodData.prodDefines.ACCT_INT_FLAG.attrValue = val.eventForm.acctintflag
-                this.prodData.prodDefines.ACCT_BAL_FLAG.attrValue = val.eventForm.amtflag
-                this.prodData.prodDefines.PROFIT_CENTRE.attrValue = val.eventForm.profitcenter
-                this.prodData.prodDefines.PROD_START_DATE.attrValue = val.eventForm.effectdate
-                this.prodData.prodDefines.PROD_END_DATE.attrValue = val.eventForm.failuredate
-                this.prodData.prodDefines.ACCT_TYPE.attrValue = val.eventForm.accttype
-
-                this.prodData.mbEventInfos.CLOSE_RB101.mbEventAttrs.CHECK_AGENT.attrValue = val.eventForm.baseprod
+                this.prodData.partnerCode.partnerCode = val.eventForm.partnerCode
+                this.prodData.partnerCode.partnerCode = val.eventForm.partnerName
+                this.prodData.partnerCode.partnerCode = val.eventForm.clientNo
             }
         }
     }

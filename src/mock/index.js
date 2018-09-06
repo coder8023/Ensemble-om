@@ -9,7 +9,9 @@ import nLoanAPI from './nLoan'
 
 import loginAPI from './login'
 import prodTypeAPI from './prodType'
+import partnerAPI from './partnerInfo'
 import userCollectAPI from './userCollect'
+
 // Mock.setup({
 //   timeout: '350-600'
 // })
@@ -35,7 +37,7 @@ Mock.mock(/\/getProdInfo/, 'post', dataAPI.getProdInfo);
 
 //网贷合作方信息管理
 Mock.mock(/\/init\/initLoanData\.*/, 'get', nLoanAPI.getInitData);
-
+Mock.mock(/\/partnerInfo\/getPartnerInfo\.*/, 'get', partnerAPI.getPartnerInfo());
 
 // 登录相关
 Mock.mock(/\/login\/login/, 'post', loginAPI.loginByUsername)
