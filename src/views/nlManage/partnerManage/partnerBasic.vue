@@ -194,6 +194,7 @@
                 this.eventForm = {}
                 this.eventForm.partnerName = val.partnerCode.partnerName
                 this.eventForm.clientNo = val.partnerCode.clientNo
+                this.eventForm.ccy = val.partnerCode.ccy
             },
             initRefDate() {
                 getInitData().then(response => {

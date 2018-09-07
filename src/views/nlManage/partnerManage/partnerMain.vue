@@ -167,8 +167,11 @@
             },
             getNewProdData(val) {
                 console.log(val)
+                this.prodData.partner.partnerCode = val.eventForm.partnerCode
                 this.prodData.partner.partnerName = val.eventForm.partnerName
                 this.prodData.partner.clientNo = val.eventForm.clientNo
+                this.prodData.partner.ccy = val.eventForm.ccy
+
             }
         }
     }

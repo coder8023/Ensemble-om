@@ -34,8 +34,18 @@ export default {
     ]),
     getPartnerData: (value) => ({
             partnerCode: {
-            partnerName: '刘亚东',
-            clientNo: '110',
+                partnerCode: '001',
+                partnerName: '刘亚东',
+                clientNo: '110',
+                partnerType: '1',
+                drwdownType: '1',
+                contributiveType: 'C',
+                joinType: 'M',
+                rateLimitFlag: 'Y',
+                rateRatio: '20%',
+                limitCheckFlag: 'Y',
+                limitCycle: 'Y',
+                ccy: 'CHN',
         }
 
 })
