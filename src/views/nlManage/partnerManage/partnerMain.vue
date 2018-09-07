@@ -62,6 +62,7 @@
     import PartnerContributive from '../partnerManage/partnerContributive';
     import PartnerAccount from '../partnerManage/partnerAccount';
     import {getPartnerInfo} from '@/api/nLoan';
+    import {getPartnerData} from '@/api/nLoan';
     export default {
         name: 'deposit',
         components: {
@@ -75,10 +76,9 @@
                 listLoading: true,
                 searchValue: '',
                 depositProd: {
-                    prodcode: '',
-                    version: ''
+                    partnerCode: '',
                 },
-                prodCode: '',
+                partner: '',
                 prodClass: '',
                 activeName: 'basic',
                 prodInfo: [{
@@ -101,8 +101,7 @@
                     lable: ''
                 }],
               folders: [
-              ],
-                  prodData: {},
+              ], prodData: {},
             sourceProdData: {},
             targetData: {}
             }
@@ -115,13 +114,6 @@
             this.getTreeList()
 
         },
-        // handleClick(value) {
-        //     this.partnerCode = value.partnerCode
-        //     getProdData(this.partnerCode).then(response => {
-        //         this.prodData = response.data
-        //         this.sourceProdData = this.copy(this.prodData,this.sourceProdData)
-        //     });
-        // },
 
         methods: {
             getTreeList() {
@@ -140,6 +132,13 @@
                 // this.targetData.option="save";
                 // savaProdInfo(this.targetData);
 
+            },
+            handleClick(value) {
+                this.partnerCode = value.partnerCode
+                getPartnerData(this.partnerCode).then(response => {
+                    this.prodData = response.data
+                    this.sourceProdData = this.copy(this.prodData,this.sourceProdData)
+                });
             },
             //对象浅复制
             copy(obj1,obj2) {
@@ -168,9 +167,8 @@
             },
             getNewProdData(val) {
                 console.log(val)
-                this.prodData.partnerCode.partnerCode = val.eventForm.partnerCode
-                this.prodData.partnerCode.partnerCode = val.eventForm.partnerName
-                this.prodData.partnerCode.partnerCode = val.eventForm.clientNo
+                this.prodData.partner.partnerName = val.eventForm.partnerName
+                this.prodData.partner.clientNo = val.eventForm.clientNo
             }
         }
     }

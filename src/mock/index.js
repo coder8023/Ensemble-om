@@ -38,7 +38,7 @@ Mock.mock(/\/getProdInfo/, 'post', dataAPI.getProdInfo);
 //网贷合作方信息管理
 Mock.mock(/\/init\/initLoanData\.*/, 'get', nLoanAPI.getInitData);
 Mock.mock(/\/partnerInfo\/getPartnerInfo\.*/, 'get', partnerAPI.getPartnerInfo());
-
+Mock.mock(/\/getPartnerData\.*/, 'post', partnerAPI.getPartnerData);
 // 登录相关
 Mock.mock(/\/login\/login/, 'post', loginAPI.loginByUsername)
 Mock.mock(/\/user\/login/, 'post', loginAPI.login)

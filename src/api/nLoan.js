@@ -23,10 +23,10 @@ export function getPartnerInfo () {
         method: 'get'
     });
 }
-export function getProdData (prodType) {
+export function getPartnerData (partnerCode) {
     return request({
-        url: '/getProdInfo',
+        url: '/getPartnerData',
         method: 'post',
-        params: { prodType: prodType}
+        params: { partnerCode: partnerCode}
     });
 }

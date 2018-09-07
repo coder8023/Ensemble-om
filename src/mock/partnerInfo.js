@@ -31,5 +31,12 @@ export default {
             ccy: 'CHN',
             partnerLimit: '1000'
         }
-    ])
+    ]),
+    getPartnerData: (value) => ({
+            partnerCode: {
+            partnerName: '刘亚东',
+            clientNo: '110',
+        }
+
+})
 }
